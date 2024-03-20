@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+</head>
+<body>
+    <h2>Login Page</h2>
+    <!-- Your login form -->
+    <form action="/login" method="post">
+        <!-- Username and password fields -->
+        <input type="text" name="username" placeholder="Username"><br>
+        <input type="password" name="password" placeholder="Password"><br>
+        <button type="submit">Login</button>
+        <a href="/skip">Skip</a> <!-- Link to skip login -->
+    </form>
+</body>
+</html>
