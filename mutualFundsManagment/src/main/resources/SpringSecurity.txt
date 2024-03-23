@@ -1,0 +1,40 @@
+SecurityConfig class
+@Configuration, @EnableWebSecurity, @EnableMethodSecurity: These annotations are used to indicate that this class provides configuration for Spring Security. @EnableMethodSecurity enables method-level security annotations such as @PreAuthorize.
+
+securityFilterChain method:
+
+@Bean: This annotation tells Spring that the method produces a bean to be managed by the Spring container.
+HttpSecurity: This is the main class for configuring web-based security in Spring. The securityFilterChain method configures security policies for different URL patterns.
+http.csrf(AbstractHttpConfigurer::disable): This disables CSRF protection.
+authorizeHttpRequests: This configures authorization rules. Here, it's configured to permit all requests to URLs starting with "userFundDetails/" and require authentication for any other request.
+formLogin(Customizer.withDefaults()): This enables form-based login authentication with default settings.
+userDetailsService method:
+
+@Bean: This method creates a bean for the UserDetailsService, which is responsible for retrieving user details from the database.
+passwordEncoder method:
+
+@Bean: This method creates a bean for the PasswordEncoder, which is responsible for encoding and verifying passwords.
+authenticationProvider method:
+
+@Bean: This method creates a bean for the AuthenticationProvider, which is used by Spring Security to authenticate users.
+DaoAuthenticationProvider: This provider uses a UserDetailsService and a PasswordEncoder to authenticate users.
+UserInfoUserDetails class
+@Component: This annotation marks the class as a Spring component, allowing it to be automatically detected and instantiated by Spring's component scanning.
+
+UserDetails interface implementation:
+
+This class implements the UserDetails interface, which represents the principal user object authenticated by Spring Security.
+It provides implementations for methods such as getAuthorities, getPassword, getUsername, etc., to provide user details to Spring Security.
+
+
+Flow Explanation:
+When a user hits an API:
+
+The request is intercepted by Spring Security's filter chain.
+Depending on the configured security rules in SecurityConfig, the request may be allowed or denied.
+If the request requires authentication, Spring Security invokes the UserDetailsService to retrieve user details from the database.
+The retrieved user details are wrapped in a UserDetails object, which is used for authentication by Spring Security.
+If authentication is successful, the request proceeds to the API controller. Otherwise, an authentication error response is sent back.
+If authorization rules are configured (e.g., @PreAuthorize annotations), Spring Security checks whether the authenticated user has the required authorities to access the API.
+If authorization is successful, the API controller processes the request and sends a response. Otherwise, an authorization error response is sent back.
+This flow ensures that incoming requests are authenticated and authorized based on the configured security rules before being processed by the API controllers.
