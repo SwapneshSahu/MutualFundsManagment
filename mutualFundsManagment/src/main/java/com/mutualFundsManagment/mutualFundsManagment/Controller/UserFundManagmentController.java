@@ -1,5 +1,7 @@
 package com.mutualFundsManagment.mutualFundsManagment.Controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,7 +22,7 @@ import com.mutualFundsManagment.mutualFundsManagment.Service.UserManagmentServic
 
 @RestController
 @RequestMapping("/userFundDetails")
-@CrossOrigin(origins = "http://localhost:8082")
+//@CrossOrigin(origins = "http://localhost:8082")
 public class UserFundManagmentController {
 
 	@Autowired
@@ -33,11 +35,11 @@ public class UserFundManagmentController {
 	private UserInfoRepository userInfoRepository;
 	
 	
-	@PreAuthorize("hasAuthority('ADMIN')")
+	@PreAuthorize("hasAuthority('USER')")
 	//@PreAuthorize("hasAuthority('ROLE_USER')")
 	@GetMapping("/welcome") // TO DO look for MONO 
-	public ResponseEntity<String> welcome() {
-		return ResponseEntity.ok(String.format("Welcome User  %s ", "swapnesh"));
+	public ResponseEntity<String> welcome( Principal principal) {
+		return ResponseEntity.ok(String.format("Welcome User %s", principal.getName()));
 	}
 	
 	
@@ -49,7 +51,7 @@ public class UserFundManagmentController {
 		return ResponseEntity.ok(String.format("User Created with Name  %s and Role %s ", userInfo.getUserName() ,userInfo.getRole()));
 	}
 
-	@PreAuthorize("hasAuthority('ADMIN')")
+//	@PreAuthorize("hasAuthority('ADMIN')")
 	@PostMapping("/buyFund") // TO DO look for MONO //to do give option to search with scheme name
 	public ResponseEntity<UserFunds> buyMF(@RequestParam String schemeCode, @RequestParam double amount) {
 
