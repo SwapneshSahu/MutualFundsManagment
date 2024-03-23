@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mutualFundsManagment.mutualFundsManagment.DTO.UserFundsDto;
 import com.mutualFundsManagment.mutualFundsManagment.Entity.MutualFundsDetails;
-import com.mutualFundsManagment.mutualFundsManagment.Entity.UserDetails;
+import com.mutualFundsManagment.mutualFundsManagment.Entity.UserInfo;
 import com.mutualFundsManagment.mutualFundsManagment.Entity.UserFunds;
 import com.mutualFundsManagment.mutualFundsManagment.Repo.MutalFundsDetailsRepo;
 import com.mutualFundsManagment.mutualFundsManagment.Repo.UserFundRepo;
@@ -28,7 +28,7 @@ public class UserFundMangmentServiceImpl implements UserFundMangmentService {
 	private UserFundRepo userFundRepo;
 
 	@Override
-	public UserFunds buyFund(String schemeCode, double amount, UserDetails user) {
+	public UserFunds buyFund(String schemeCode, double amount, UserInfo user) {
 
 		MutualFundsDetails mutualFundDetails = mutalFundsDetailsRepo.findBySchemeCode(schemeCode);
 
@@ -52,7 +52,7 @@ public class UserFundMangmentServiceImpl implements UserFundMangmentService {
 				userFunds = new UserFunds();
 				userFunds.setSchemeCode(schemeCode);
 				userFunds.setAvgNav(nav);
-				userFunds.setUserDetails(user);
+				userFunds.setUserInfo(user);
 				userFunds.setUnits(currUnit);
 				userFunds.setLastBuyDate(new Date());
 				userFunds.setTotalAmount(amount);
@@ -71,7 +71,7 @@ public class UserFundMangmentServiceImpl implements UserFundMangmentService {
 	}
 
 	@Override
-	public UserFundsDto sellFund(String schemeCode, UserDetails user) {
+	public UserFundsDto sellFund(String schemeCode, UserInfo user) {
 		
 		MutualFundsDetails mutualFundDetails = mutalFundsDetailsRepo.findBySchemeCode(schemeCode);
 		

@@ -2,15 +2,10 @@ package com.mutualFundsManagment.mutualFundsManagment.DTO;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mutualFundsManagment.mutualFundsManagment.Entity.MutualFundsDetails;
-import com.mutualFundsManagment.mutualFundsManagment.Entity.UserDetails;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.mutualFundsManagment.mutualFundsManagment.Entity.UserInfo;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +22,7 @@ public class UserFundsDto {
     private Long id;
 	
 	
-    private UserDetails userDetails;
+    private UserInfo userInfo;
 	
 	
 	private MutualFundsDetails mutualFundDetails;

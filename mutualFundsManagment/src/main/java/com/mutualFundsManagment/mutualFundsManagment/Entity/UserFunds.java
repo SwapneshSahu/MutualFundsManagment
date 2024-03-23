@@ -28,9 +28,9 @@ public class UserFunds {
     private Long id;
 	
 	@ManyToOne
-    @JoinColumn(name = "user_details_id")
+    @JoinColumn(name = "user_info_id")
 	@JsonIgnore
-    private UserDetails userDetails;
+    private UserInfo userInfo;
 	
 
 	private String schemeCode;
